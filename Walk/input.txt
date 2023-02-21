@@ -1,0 +1,1 @@
+javac RandomWalker.java && java RandomWalker 10 100
