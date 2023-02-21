@@ -1,0 +1,9 @@
+GetCountryWithMostMedals
+GetCountryWithMostGoldMedals
+GetAthleteWithMostMedals
+GetAthleteWithMostGoldMedals
+GetSportAndEventByAthlete Who?
+GetEventsBySport Skelethree
+GetSportAndEventByAthlete Sans
+GetGoldMedalistAndCountryBySportAndEvent Skeletone teeth?
+GetWinnersAndCountriesBySportAndEvent Skelefour milkchugging

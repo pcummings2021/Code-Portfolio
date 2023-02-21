@@ -1,0 +1,7 @@
+GetEventsBySport LoL
+GetWinnersAndCountriesBySportAndEvent MarioKart Professionals
+GetSportAndEventByAthlete Person1
+GetCountryWithMostMedals
+GetCountryWithMostGoldMedals
+GetAthleteWithMostMedals
+GetAthleteWithMostGoldMedals

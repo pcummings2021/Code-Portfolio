@@ -1,0 +1,14 @@
+AddActivity 07211245 Swimming
+AddActivity 07211246 Biking
+AddActivity 07211247 Hiking
+GetActivitiesForOneDay 0721
+PrintSkipList
+RemoveActivity 07211245
+PrintSkipList
+RemoveActivity 07211246
+PrintSkipList
+RemoveActivity 07211247
+PrintSkipList
+GetActivitiesBetweenTimes 07211247 07211248
+GetActivitiesFromEarlierInTheDay 07211250
+GetActivitiesForOneDay 0721

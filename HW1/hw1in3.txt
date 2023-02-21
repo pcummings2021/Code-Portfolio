@@ -1,0 +1,12 @@
+SetProductPrice appleIPhone amazon 400.99
+SetProductPrice appleIPhone walmart 450.99
+SetProductPrice appleIPhone bestbuy 410.99
+IncreaseInventory appleIPhone amazon 101
+IncreaseInventory appleIPhone amazon 150
+IncreaseInventory appleIPhone walmart 101
+IncreaseInventory appleIPhone bestbuy 101
+SetProductPrice hdmi2VgaAdapter amazon 100.50
+SetProductPrice hdmi2VgaAdapter bestbuy 100.64
+SetProductPrice hdmi2VgaAdapter walmart 100.50
+DisplaySellerList appleIPhone
+DisplaySellerList hdmi2VgaAdapter

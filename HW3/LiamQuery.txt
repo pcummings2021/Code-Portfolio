@@ -1,0 +1,8 @@
+GetEventsBySport Banana
+GetWinnersAndCountriesBySportAndEvent Cherry CSkin
+GetGoldMedalistAndCountryBySportAndEvent Apple ASkin
+GetAthleteWithMostMedals
+GetAthleteWithMostGoldMedals
+GetCountryWithMostMedals
+GetCountryWithMostGoldMedals
+GetSportAndEventByAthlete Gabriel

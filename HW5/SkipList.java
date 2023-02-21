@@ -1,0 +1,231 @@
+/*
+ *  Author: Parker Cummings
+ *  Email: pcummings2021@my.fit.edu
+ *  Course: CSE 2010
+ *  Section: 4
+ * 
+ *  Description of this program: Skip List implementation class, used to create the skip list of (key, value) pairs of times 
+ *  and activities. The code below is a modified version of the DoublyLinkedList class, provided by Data Structures and 
+ *  Algorithms in Java, Book by Michael T. Goodrich and Roberto Tamassia.
+ */
+
+import java.util.ArrayList;
+
+public class SkipList<Node> {
+
+    // static generic Node class used for creating nodes with elements and pointers in all 4 directions
+    static class Node<E> {
+
+        // each node contains an element of type Entry
+        Entry element;
+
+        // each node has pointers in all 4 different directions
+        Node<Entry> down;
+        Node<Entry> next;
+        Node<Entry> above;
+        Node<Entry> prev;
+
+        // constructor for a node, takes in a parameter, an object of type Entry
+        public Node(Entry e) {
+            // sets the element to the Entry object
+            element = e;
+            // since pointers will be assigned during insertion, all 4 pointers are initialized to null
+            down = null;
+            next = null;
+            above = null;
+            prev = null;
+        }
+    }
+
+    // creates an object of the given "FakeRandHeight" class to determine the # of levels for each node
+    static FakeRandHeight h = new FakeRandHeight();
+    // creates an initially empty head and tail node for the list
+    Node<Entry> head;
+    Node<Entry> tail;
+    // the min and max integer values will be the keys for the head and tail of the list
+    int pInf = Integer.MAX_VALUE;
+    int nInf = Integer.MIN_VALUE;
+    // the initial height of the list is 0
+    int height = 0;
+
+    // a constructor for a skip list object
+    public SkipList() {
+        // creates a head and tail, with keys of min and max integer values
+        head = new Node<Entry>(new Entry(nInf, null));
+        tail = new Node<Entry>(new Entry(pInf, null));
+        // assigns pointers
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    // a skipSearch method to that returns a node that matches a given key
+    public Node<Entry> get(Integer key) {
+        // starts at the head
+        Node<Entry> p = this.head;
+        while (p.down != null) { // will look at each level, descending
+            p = p.down;
+            while (key >= p.next.element.getKey()) { // checks every node at every level for the key
+                p = p.next;
+            }
+        }
+        return p; // returns the value if found, null if the search was a failure;
+    }
+
+    // insertion method, returns node being inserted. Takes in a key and value pair, an Integer and a String
+    public Node<Entry> put(Integer key, String value) {
+        // first finds the insertion point, since the skipSearch method finds the floor value
+        Node<Entry> p = get(key);
+        Node<Entry> q = null; // abstract node for later use
+        int level = -1; // initially, the node has no height
+        int height = h.get(); // the FakeRandHeight object is used to determine the height of the new node
+        if(p.element.key == key) {
+            return p; // if the node found for insertion is actually the target node, the node is returned
+        }
+        // loop will continue from level 0 to whatever integer the FakeRandHeight object provides
+        for(int i = 0; i <= height; i++) {
+            level++; // increases the level
+                if(level >= this.height) { // if the height of the list cannot contain the new level, one is added
+                    this.height++;
+                    addTopLevel();
+            }
+            q = p;
+            while(p.above == null) { // the method scans backward to find the first point where the above pointer is not null
+                p = p.prev;
+            }
+            // jumps up to the next level once the correct placement point is found
+            p =p.above;
+            q = insertAfterAbove(p, q, key, value); // inserts the node into the skip list
+       }
+       return q; // returns the inserted node, returns null if insertion fails
+    }
+    
+    // void method for adding a new level in the case that the list cannnot contain a new level for a node being inserted
+    public void addTopLevel() {
+        // creates two new infinity nodes for the new head and tail of the list
+        Node<Entry> headNew = new Node<>(new Entry(nInf, null));
+        Node<Entry> tailNew = new Node<>(new Entry(pInf, null));
+        // creates pointers from new head to new tail and vice versa
+        headNew.next = tailNew;
+        headNew.down = head;
+        tailNew.prev = headNew;
+        tailNew.down = tail;
+        // changes the head and tail to the new nodes just created
+        head.above = headNew;
+        tail.above = tailNew;
+        head = headNew;
+        tail = tailNew;
+    }
+
+    // method for removing nodes from the skip list, takes in the key of the node being removed
+    public Node<Entry> remove(int key) {
+        Node<Entry> removed = this.get(key); // finds the node to be removed
+        if(removed.element.getKey() != key) {
+            // if the node does not exist in the list, it cannot be removed
+            return null;
+        }
+        while(removed != null) {
+            // removes all pointers to the node being removed
+            removed.prev.next = removed.next;
+            removed.next.prev = removed.prev;
+            // confirms that the current node is not the top of the list, then continues iteration
+            if(removed.above != null) {
+                removed = removed.above;
+                // will check that if the node being removed is the only node on that level
+            }
+            else { // will break the loop once the removed node is at the top
+                break;
+            }
+        }
+        Node<Entry> current = this.head.down;
+        // eliminates all the empty lists, leaving one 
+        while(current != null) {
+            // removes the top level until there is only one with the positive and negative infinity nodes
+            if(current.next.element.getValue() == null) {
+                this.removeTopLevel();
+            }
+            current = current.down; // iterates through each level
+        }
+        return removed; // returns the node that was removed
+    }
+
+    // void method to remove the top level of a skip list to maintain property that the top level is the only with +/- infinty
+    public void removeTopLevel() {
+        head = this.head.down; // changes the head pointer to the next lower level
+        tail = this.tail.down; // changes the tail pointer to the next lower level
+        // eliminates the old head and tail values
+        head.above = null;
+        tail.above = null;
+        // decreases the height by one
+        this.height--;
+    }
+
+    // method to actually insert a node into a skip list, takes int two nodes and a (key, value) pair
+    public Node<Entry> insertAfterAbove(Node<Entry> p, Node<Entry> q, int key, String value) {
+        // creates a new node based on the given (key, value) pair
+        Node<Entry> n = new Node<>(new Entry(key, value));
+        // the node before the node being inserted will be two levels below the current position p
+        Node<Entry> before = p.down.down;
+        // since q is now the original position, the pointers are changed so that the new node is inserted
+        n.next = q.next;
+        n.prev = q;
+        q.next.prev = n;
+        q.next = n;
+        if(before != null) { // confirms that the node before the node being added is an actual node
+            // will continue moving the before node until the before's next node is the correct node
+            while(before.next.element.getKey() != key) {
+                before = before.next;
+            }
+            n.down = before.next; // changes the pointers to insert new node n
+            before.next.above = n;
+        }
+        // confirms that if the node p is not the highest tier on the list, it will be the above for the new node n
+        if(p != null) {
+            if(p.next.element.getKey() == key) { // finds the correct insertion point and changes pointers
+                n.above = p.next;
+            }
+        }
+        return n; // returns the node that was just inserted     
+    }
+
+    // method that returns a list of all entries between k1 (inclusive) and k2 (exclusive), takes in integers k1 and k2
+    public ArrayList<Node<Entry>> subMap(int k1, int k2) {
+        // additional data structure to hold all activities between the two times
+        ArrayList<SkipList.Node<Entry>> arr = new ArrayList<>();
+        SkipList.Node<Entry> current = this.head; // starts at the head of the list
+        while(current.down != null) {
+            current = current.down; // traverses down to the last level where all nodes are located
+        }
+        current = current.next; // since the current node is the node containing negative infinity, we start from the next node
+        while(current.next != null) {
+            // checks if the key for each element is within the bounds of the start and end time
+            if(current.element.getKey() >= k1 && current.element.getKey() < k2) {
+                arr.add(current); // if conditions are satisfied, node is added to the list
+            }
+            current = current.next; // iterates through the rest of the list
+        }
+        return arr; // returns the list
+    }
+}
+
+// An Entry class for creating entries for nodes in the skip list
+class Entry {
+    // takes in an integer, the key, and a string, the value
+    Integer key;
+    String value;
+
+    // constructor for an entry
+    public Entry(Integer t, String a) {
+        key = t;
+        value = a;
+    }
+
+    // returns the key of the node
+    public Integer getKey() {
+        return this.key;
+    }
+
+    // returns the value of the node
+    public String getValue() {
+        return this.value;
+    }
+}

@@ -1,0 +1,10 @@
+EsportGames MarioKart LoL OverWatch
+LoL JV Varsity
+MarioKart AllAccess Professionals
+OverWatch Platnum Immortal
+Platnum Person1:Brazil Person2:Netherlands Person3:Madagascar
+Immortal Person1:Brazil Person4:Netherlands Person5:Netherlands
+AllAccess Person5:Netherlands SomeGuy:Switzerland Person6:Austria
+JV Curtice:USA Cody:USA SomeGuy:Switzerland
+Varsity Person1:Brazil CoolGuy:OAR BritishGuy:GreatBritain
+Professionals BritishGuy:GreatBritain CoolGuy:OAR BritishGuy2:GreatBritain

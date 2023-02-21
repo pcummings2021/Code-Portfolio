@@ -1,0 +1,23 @@
+SetProductPrice appleIPhone ebay 420.69
+SetProductPrice appleIPhone craigslist 800
+SetProductPrice USBdrive sandisk 19.99
+SetProductPrice USBdrive ebay 9.99
+SetProductPrice hdmi2VgaAdapter craigslist 5
+SetProductPrice hdmi2VgaAdapter ebay 9.99
+SetShippingCost ebay 10 25
+IncreaseInventory appleIPhone ebay 500
+SetShippingCost craigslist 10 10
+IncreaseInventory hdmi2VgaAdapter craigslist 3
+SetShippingCost sandisk 13.99 25
+IncreaseInventory appleIPhone craigslist 20
+CustomerPurchase appleIPhone craigslist 600
+DisplaySellerList appleIPhone
+IncreaseInventory USBdrive sandisk 1000
+IncreaseInventory USBdrive ebay 100
+IncreaseInventory hdmi2VgaAdapter ebay 40
+CustomerPurchase appleIPhone craigslist 20
+CustomerPurchase USBdrive ebay 20
+CustomerPurchase hdmi2VgaAdapter craigslist 1
+DisplaySellerList appleIPhone
+DisplaySellerList USBdrive
+DisplaySellerList hdmi2VgaAdapter
