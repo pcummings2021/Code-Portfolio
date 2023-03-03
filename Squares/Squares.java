@@ -1,0 +1,164 @@
+/*
+ * Author: Parker Cummings, pcummings2021@my.fit.edu
+ * Course: CSE 1002, Section 3, Fall 2021
+ * Project: Fun with Squares
+ */
+
+public final class Squares {
+
+   public static void main (final String[] args) {
+
+      // reads ratio, level, and pattern number from command line
+      final Double ratio = Double.parseDouble(args[0]);
+      final Integer level = Integer.parseInt(args[1]);
+      final Integer pattern = Integer.parseInt(args[2]);
+
+
+      // determines which method to run based on pattern input
+      // size of base square is always 0.5 x 0.5
+      if (pattern == 1) {
+         pattern1(0.5, ratio, level, 0.5, 0.5);
+      }
+      else if (pattern == 2) {
+         pattern2(0.5, ratio, level, 0.5, 0.5);
+      }
+      else if (pattern == 3) {
+         pattern3(0.5, ratio, level, 0.5, 0.5);
+      }
+      else if (pattern == 4) {
+         pattern4(0.5, ratio, level, 0.5, 0.5);
+      }
+
+   }
+
+   // method for drawing the base square of size 0.5 x 0.5, centered on (x,y)
+   public static void drawSquare (final double size, final double x,
+         final double y) {
+
+      int red = (int)(Math.random()*255);
+      int green = (int)(Math.random()*255);
+      int blue = (int)(Math.random()*255);
+      StdDraw.setPenColor(red, green, blue);
+      StdDraw.filledSquare(x, y, size/2);
+      StdDraw.setPenColor(red, green, blue);
+      StdDraw.square(x, y, size/2);
+
+   }
+
+   // method for first pattern
+   public static void pattern1 (final double size, final double ratio,
+         final int level, final double x, final double y) {
+
+      // if the level reaches 0, the method ends
+      if (level < 1) {
+         return;
+      }
+
+      // creates new coordinates for corners of main square, which will be
+      // the centers of the new squares
+      final double x0 = x - size/ratio;
+      final double x1 = x + size/ratio;
+      final double y0 = y - size/ratio;
+      final double y1 = y + size/ratio;
+
+      // recursive pattern 1 method, creating a new square at each corner,
+      // and a new sqaure at the corner of ech of those squares
+      pattern1(size/ratio, ratio, level-1, x0, y0);
+      pattern1(size/ratio, ratio, level-1, x0, y1);
+      pattern1(size/ratio, ratio, level-1, x1, y0);
+      pattern1(size/ratio, ratio, level-1, x1, y1);
+
+      // since the base square is in front of all the smaller ones, that
+      // sqaure is drawn after the values x0, x1, y0, and y1 are determined
+      drawSquare(size, x, y);
+
+   }
+
+   // method for second pattern
+   public static void pattern2 (final double size, final double ratio,
+         final int level, final double x, final double y) {
+
+      // if the level reaches 0, the method will end
+      if (level < 1) {
+         return;
+      }
+
+      // creates new coordinates for corners of main square, which will be
+      // the centers of the new squares
+      final double x0 = x - size/ratio;
+      final double x1 = x + size/ratio;
+      final double y0 = y - size/ratio;
+      final double y1 = y + size/ratio;
+
+      // recursive pattern 2 method,
+      // draws the first three squares on each corner
+      pattern2(size/ratio, ratio, level-1, x0, y0);
+      pattern2(size/ratio, ratio, level-1, x0, y1);
+      pattern2(size/ratio, ratio, level-1, x1, y1);
+
+      // calls drawSquare method to create the new square
+      drawSquare(size, x, y);
+
+      // draws the new square at the bottom right of the last square
+      pattern2(size/ratio, ratio, level-1, x1, y0);
+
+   }
+
+   // method for third pattern
+   public static void pattern3 (final double size, final double ratio,
+         final int level, final double x, final double y) {
+
+      // draws new squares at the determined coordinates (x,y)
+      drawSquare(size, x, y);
+
+      // if level reaches 1, the method ends
+      if (level == 1) {
+         return;
+      }
+
+      // creates new coordinates for corners of main square, which will be
+      // the centers of the new squares
+      final double x0 = x - size/ratio;
+      final double x1 = x + size/ratio;
+      final double y0 = y - size/ratio;
+      final double y1 = y + size/ratio;
+
+      // recursive method for pattern 3, draws the squares
+      // on top of the base square recursively
+      pattern3(size/ratio, ratio, level-1, x0, y0);
+      pattern3(size/ratio, ratio, level-1, x0, y1);
+      pattern3(size/ratio, ratio, level-1, x1, y0);
+      pattern3(size/ratio, ratio, level-1, x1, y1);
+
+   }
+
+   // method for fourth pattern
+   public static void pattern4 (final double size, final double ratio,
+         final int level, final double x, final double y) {
+
+      // if level reaches 0, the method ends
+      if (level < 1) {
+         return;
+      }
+
+      // the centers of the new squares
+      final double x0 = x - size/ratio;
+      final double x1 = x + size/ratio;
+      final double y0 = y - size/ratio;
+      final double y1 = y + size/ratio;
+
+      // recursive method for pattern 4  creates the top two smaller
+      // squares one level behind the last square
+      pattern4(size/ratio, ratio, level-1, x1, y1);
+      pattern4(size/ratio, ratio, level-1, x0, y1);
+
+      // calls drawSquare method to create the squares once recursion extends
+      // method then traces back, drawing squares at coordinates (x,y)
+      drawSquare(size, x, y);
+
+      // continues recursion
+      pattern4(size/ratio, ratio, level-1, x0, y0);
+      pattern4(size/ratio, ratio, level-1, x1, y0);
+
+   }
+} // end of program
