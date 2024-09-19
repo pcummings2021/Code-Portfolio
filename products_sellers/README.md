@@ -1,4 +1,4 @@
-Description of this program: 
+# Description of this program: 
  *  This file takes three items: an iPhone, a HDMI to VGA Adapter, and a USB Drive.
  *  each item can has a price, a shipping cost, a quantity, and n number of sellers. They also CAN have a minimum cost for free shipping.
  *  There are 5 different events that can take place in the input. 'SetProductPrice', 'SetShippingCost', 'IncreaseInventory',
