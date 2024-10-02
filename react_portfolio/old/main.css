@@ -1,0 +1,171 @@
+/* Main Container */
+body{
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, serif;
+    color: #FF7F50;
+    background-color: #6b778d;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+
+
+/* Main page title */
+h1.mainTitle {
+    margin: 10px 20px 0 20px;
+    padding: 0;
+    background-image: linear-gradient(45deg, #FF7F50, #FFFFFF);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: padding;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* Adding margins to sub-headings */
+h2, h3, h4 {
+    margin: 10px 10px 10px 20px;
+}
+
+/* Adding line below each page heading */
+h2.header:after {
+    content: '';
+    display: block;
+    height: 2px;
+    background-color: #FFFDD0;
+    margin-top: 1px;
+}
+
+/* Main Navigation */
+nav li {
+    border: 1px solid #FFFDD0;
+    display: inline-block;
+    padding: 1px;
+    margin: 1px 5px;
+    border-radius: 4px;
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: #FFFDD0;
+    }
+    /* When cursor hovers over links */
+    a:hover {
+        background-color: #FFFDD0;
+        color: #495268;
+        font-style: italic;
+    }
+}
+
+/* Active link */
+nav li.active {
+    a {
+        color: #FF7F50;
+        display: inline-block;
+    }
+
+    /* Active link color when mouse hovered over */
+    nav li.active a:hover{
+        color: #495268;
+        border-color: #495268;
+    }
+}
+
+
+/* Styling header/footer color */
+header, footer {
+    display: flex;
+    flex-direction: column;
+    background: #495268;
+}
+
+/* Footer navigation */
+footer {
+    margin-top: auto; /* Keep footer at bottom of page */
+    nav {
+        text-align: center;
+        li {
+            border: none;
+            border-radius: 0;
+            border-bottom: 2px solid #FFFDD0;
+            margin: 0 30px
+        }
+    }
+}
+
+/* Social media links */
+footer nav.social-media li{
+    border: none;
+    border-bottom: 1px solid #FFFDD0;
+    margin: 0 30px;
+}
+
+/* Style links in text */
+a.link {
+    color: #FF7F50;
+    text-decoration: none;
+
+}
+
+/* Links in text with hovering */
+a.link:hover{
+    color:#FFFDD0;
+    text-decoration: #FFFDD0 wavy underline;
+}
+
+/* Style elements in lists */
+div li{
+    color: #FFFDD0;
+}
+
+div.copyright {
+    text-align: center;
+    color: #FFFDD0;
+}
+
+/* Styling text color in bullets and descriptions */
+p.description {
+    color:#FFFDD0;
+    margin: 10px 20px 20px 20px;
+    display: inline-block;
+    width: 75%;
+}
+
+/* Style images and videos for Projects page */
+img, video {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    max-width: 100%;
+    height: auto;
+    padding: 5px
+}
+
+/* Styling for Mobile devices */
+@media screen and (max-width: 768px) {
+
+    /* Making all <li>'s block display */
+    nav li{
+        display:block;
+        text-align: left;
+        margin: 10px 10px;
+    }
+
+    footer nav {
+        li {
+            display: block;
+            margin: auto auto
+        }
+    }
+
+    /* Removing margins from social media links */
+    footer nav.social-media li {
+        margin: 0 0;
+    }
+
+    /* Adding special bullet char for mobile view */
+    nav.footer-nav li:before {
+        content: "> ";
+    }
+}
