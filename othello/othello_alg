@@ -1,0 +1,6 @@
+func Alpha-Beta-Decision(current_board)
+	 for a in Possible_Moves(current_board)
+	 	move = Max (Min-value(Result(a, current_board)))
+
+
+func Find-Max(current_board, alpha, beta)

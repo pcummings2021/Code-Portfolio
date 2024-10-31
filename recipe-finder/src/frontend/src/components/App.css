@@ -1,0 +1,124 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.banner {
+  max-height: 200px; /* Set the maximum height of the banner image */
+}
+
+.Search {
+  margin-bottom: 20px;
+}
+
+.Search input[type="text"] {
+  padding: 8px;
+  margin-right: 10px;
+  width: 40%; /* Set the width to 40% of the screen */
+  border-radius: 10px; /* Rounded edges */
+  border: 1px solid #ccc; /* Border color */
+  background-image: url('https://media.istockphoto.com/id/924437708/vector/magnifying-glass-icon.jpg?s=612x612&w=0&k=20&c=VXDoaQ6Ns61N2v6CsMXX-vYlG5oUY3ufoUncvUp1zNY=');
+  background-repeat: no-repeat;
+  background-position: left 8px center; /* Position the magnifying glass icon */
+  background-size: 30px; /* Scale the icon */
+  padding-left: 30px; /* Leave space for the icon */
+}
+
+.Search button.searchButton {
+  padding: 8px 16px;
+  background-color: turquoise; /* Turquoise background color */
+  color: #fff; /* Text color */
+  border: none;
+  cursor: pointer;
+  border-radius: 20px; /* Rounded corners */
+}
+
+.Search button.searchButton,
+.dbButton { /* Apply the same styling to .dbButton */
+  padding: 8px 16px;
+  background-color: turquoise; /* Turquoise background color */
+  color: #fff; /* Text color */
+  border: none;
+  cursor: pointer;
+  border-radius: 20px; /* Rounded corners */
+  margin-left: 10px; /* Add some margin between buttons */
+}
+
+.dbButton {
+  float: right; /* Right-align the button */
+  margin-right: 5%;
+}
+
+.SearchResults {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.RecipeCard {
+  border: none;
+  padding: 10px;
+  width: 20%; /* 20% width for each card */
+  box-sizing: border-box; /* Include padding in the width calculation */
+  text-align: left;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.RecipeCard.showIngredients {
+  color: red;
+  height: auto; /* Adjust height to accommodate ingredient list */
+}
+
+.RecipeCard img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px; /* Rounded corners for the image */
+  margin: auto; /* Center the image horizontally */
+}
+
+.RecipeCard h3 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.RecipeCard p {
+  margin: 5px 0;
+}
+
+.RecipeCard a {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+h4 {
+  margin-bottom: 10px; /* Add space below the heading */
+}
+
+h4::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #ccc; /* Line color */
+  margin-top: 10px; /* Add space above the line */
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .RecipeCard {
+    width: 100%; /* Full width for mobile devices */
+  }
+}
